@@ -13,7 +13,7 @@ public class Generala
         int iguales = 0;
         for (int x = 0; x<datos.length(); x++){
             if (datos[x] == datos[x+1]){
-                iguales+;
+                iguales++;
             }
             System.out.println(iguales);
         }
