@@ -74,6 +74,7 @@ public class Generala
                     g.stringToHashMap(userInput);
                 }while(!isInteger(userInput) || numero<1 || numero>6);
             }
+            Objeto.close();
         System.out.println(g.jugada());;
     }
 }
