@@ -11,9 +11,9 @@ public class Generala
     // QUE NECESITEN PARA RESOLVER EL EJERCICIO DE LA
     // MANERA MÁS ORDENADA POSIBLE
     HashMap<Integer, Integer> Diccionario = new HashMap<>();
-    static int numero = 0;
-    int[] intArray = new int[5];
-    int contadorEscalera =1;
+    private static int numero = 0;
+    private final int[] intArray = new int[5];
+    private int contadorEscalera =1;
     String jugada()
     {
         if (generala()){return "GENERALA";}
