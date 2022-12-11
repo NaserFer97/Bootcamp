@@ -3,7 +3,7 @@ package bootcampDia6;
 import java.util.*;
 
 public class Poker {
-    private final HashMap<String, Integer> hashPoker = new HashMap<String, Integer>();
+    private final HashMap<String, Integer> hashPoker = new HashMap<>();
     private final String[] valoresNumericos = {"A","2","3","4","5","6","7","8","9","T","J","Q","K"};
     private final String[] palos = {"S","C","H","D"};
     private final String[] cartas = new String[5];
@@ -16,7 +16,7 @@ public class Poker {
         }catch(Exception e){return false;}
     }
     private void inputCartas(){
-        String carta = null;
+        String carta;
         Scanner Objeto = new Scanner(System.in);
         System.out.println("Valores numericos del Poker: A, 2, 3, 4, 5, 6, 7, 8, 9, T, J, Q, K");
         System.out.println("Palos del Poker: S, C, H, D");
@@ -59,7 +59,7 @@ public class Poker {
             for (int j = 0; j<5; j++){
                 if (Objects.equals(String.valueOf(cartas[x].charAt(0)), String.valueOf(cartas[j].charAt(0)))){
                     contador++;
-                };
+                }
             }
             if (contador>mayorOcurrencia){
                 mayorOcurrencia = contador;
@@ -97,11 +97,7 @@ public class Poker {
                 contador++;
             }
         }
-        if(contador==1)
-        {
-            return true;
-        }
-        return false;
+        return contador == 1;
     }
     private void hashPoker() {
         for (int x = 0; x < 5; x++) {
@@ -119,11 +115,7 @@ public class Poker {
                 contador++;
             }
         }
-        if(contador==1)
-        {
-            return true;
-        }
-        return false;
+        return contador == 1;
     }
     private boolean parDoble(){
         int contador = 0;
@@ -132,11 +124,7 @@ public class Poker {
                 contador++;
             }
         }
-        if(contador==2)
-        {
-            return true;
-        }
-        return false;
+        return contador == 2;
     }
     private boolean escaleraColor() {
         int index1 = -1;
