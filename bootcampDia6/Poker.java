@@ -30,6 +30,7 @@ public class Poker {
         }
         cartas[x] = carta;
         }
+        Objeto.close();
         hashPoker();
     }
     private String checkClase(){
