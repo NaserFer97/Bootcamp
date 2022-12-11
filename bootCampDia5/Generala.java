@@ -1,9 +1,4 @@
 import java.util.*;
-import java.io.File;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.LinkedHashMap;
-import java.util.Iterator;
 public class Generala
 {
     // ESTA ES LA FUNCIÓN QUE HAY QUE IMPLEMENTAR
@@ -32,19 +27,14 @@ public class Generala
         }
     }
     public boolean generala(){
-        if(Diccionario.size() == 1){
-            return true;
-        }else{return false;}
+        return Diccionario.size() == 1;
     }
     public boolean poker(){
-        if(Diccionario.containsValue(4)){
-            return true;
-        }
-    else{return false;}}
+        return Diccionario.containsValue(4);
+    }
     public boolean escalera(){
-        if (contadorEscalera ==5){
-            return true;}
-        else{return false;}}
+        return contadorEscalera == 5;
+    }
     public void stringToHashMap(String dados){
         int numero = Integer.parseInt(dados);
             if (Diccionario.containsKey(numero)) {
@@ -53,14 +43,12 @@ public class Generala
             {Diccionario.put(Integer.parseInt(dados), 1);}
         }
     public boolean full() {
-        if (Diccionario.size() == 2 && Diccionario.containsValue(3)){
-            return true;
-        }else{return false;}
+        return Diccionario.size() == 2 && Diccionario.containsValue(3);
     }
     public static void main(String[] args) {
         Generala g = new Generala();
         Scanner Objeto = new Scanner(System.in);
-        String userInput = null;
+        String userInput;
         System.out.println("Ingresar 5 dados ");
             for (int x =0; x<5; x++){
                 do{
@@ -75,6 +63,6 @@ public class Generala
                 }while(!isInteger(userInput) || numero<1 || numero>6);
             }
             Objeto.close();
-        System.out.println(g.jugada());;
+        System.out.println(g.jugada());
     }
 }
