@@ -16,7 +16,7 @@ public class Generala
         if (full()){return "FULL";}
         if (escalera()){return "ESCALERA";}
         else{
-            return "NADA";
+            return "\nNADA";
     }
     }
     public boolean generala(){
@@ -34,7 +34,7 @@ public class Generala
             for (int j=x; j<4; j++ ){
                 if (intArray[x] == intArray[j+1]-1){
                     contadorEscalera++;
-                } else if (intArray[x] == 6 && intArray[j+1] ==1) {
+                } else if (intArray[x] == 6 && intArray[j+1] ==1 && x == 3) {
                     contadorEscalera++;
                 }
             }
@@ -55,11 +55,11 @@ public class Generala
     }
     public void generarDados(){
         //Genera 5 dados y los añade al array de dados
-        System.out.println("Dados");
+        System.out.print("Dados: ");
         for (int x = 0; x<5; x++){
             int dado;
             dado = 1 + (int)(Math.random() * ((6 - 1) + 1));
-            System.out.format("Dado %d: %d\n", x+1, dado);
+            System.out.print(dado);
             intArray[x] = dado;
             stringToHashMap(Integer.toString(dado));
         }
