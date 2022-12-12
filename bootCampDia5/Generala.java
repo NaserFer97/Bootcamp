@@ -6,17 +6,17 @@ public class Generala
     // QUE NECESITEN PARA RESOLVER EL EJERCICIO DE LA
     // MANERA MÁS ORDENADA POSIBLE
     HashMap<Integer, Integer> Diccionario = new HashMap<>();
-    private final int[] intArray = new int[5];
+    private int[] intArray = new int[5];
     String jugada()
     {
         //Se encarga de generar los dados y determinar que clase de jugada es
         generarDados();
-        if (generala()){return "GENERALA";}
-        if (poker()){return "POKER";}
-        if (full()){return "FULL";}
-        if (escalera()){return "ESCALERA";}
+        if (generala()){return ": GENERALA";}
+        if (poker()){return ": POKER";}
+        if (full()){return ": FULL";}
+        if (escalera()){return ": ESCALERA";}
         else{
-            return "\nNADA";
+            return ": NADA";
     }
     }
     public boolean generala(){
@@ -30,12 +30,14 @@ public class Generala
     public boolean escalera(){
         //Retorna escalera si los numeros son consecutivos
         int contadorEscalera = 1;
-        for (int x =0; x<5; x++){
-            for (int j=x; j<4; j++ ){
-                if (intArray[x] == intArray[j+1]-1){
-                    contadorEscalera++;
-                } else if (intArray[x] == 6 && intArray[j+1] ==1 && x == 3) {
-                    contadorEscalera++;
+        if(Diccionario.size() == 5){
+            for (int x =0; x<5; x++){
+                for (int j=x; j<4; j++ ){
+                    if (intArray[x] == intArray[j+1]-1){
+                        contadorEscalera++;
+                    } else if (intArray[x] == 6 && intArray[j+1] ==1 && x == 3) {
+                        contadorEscalera++;
+                    }
                 }
             }
         }
