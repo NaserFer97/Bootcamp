@@ -1,36 +1,34 @@
 package bootcampDia6;
-
 import java.util.*;
 
 public class Poker {
     private final HashMap<String, Integer> hashPoker = new HashMap<>();
     private final String[] valoresNumericos = {"A","2","3","4","5","6","7","8","9","T","J","Q","K"};
     private final String[] palos = {"S","C","H","D"};
-    private final String[] cartas = new String[5];
+    private final String[] cartas = {"", "", "", "", ""};
     private int mayorOcurrencia = 0;
     private String mayorValor = null;
 
-    private boolean inputCorrecto(String carta) {
-        try{
-            return Arrays.asList(valoresNumericos).contains(String.valueOf(carta.charAt(0))) && Arrays.asList(palos).contains(String.valueOf(carta.charAt(1)));
-        }catch(Exception e){return false;}
-    }
-    private void inputCartas(){
-        String carta;
-        Scanner Objeto = new Scanner(System.in);
-        System.out.println("Valores numericos del Poker: A, 2, 3, 4, 5, 6, 7, 8, 9, T, J, Q, K");
-        System.out.println("Palos del Poker: S, C, H, D");
-        for (int x =0; x<5; x++){
-            System.out.format("Ingrese su carta %d: ", x+1);
-            carta = Objeto.nextLine();
-        while(!inputCorrecto(carta)){
-            System.out.println("Por favor, ingrese una carta valida.");
-            System.out.format("Ingrese su carta %d: ", x+1);
-            carta = Objeto.nextLine();
-        }
-        cartas[x] = carta;
-        }
-        Objeto.close();
+    private void getRandom() {
+        Random random = new Random();
+        String cartaGenerada;
+        int cartasGeneradas =0;
+        do {
+            boolean flag = false;
+            int indexNumerico = random.nextInt(13);
+            int indexPalos = random.nextInt(4);
+            cartaGenerada = String.format("%s%s", valoresNumericos[indexNumerico], palos[indexPalos]);
+            for (int x = 0; x<5; x++) {
+                if (cartas[x].equals(cartaGenerada)) {
+                    flag = true;
+                    break;
+                }
+            }
+            if (!flag) {
+                cartas[cartasGeneradas] = cartaGenerada;
+                cartasGeneradas++;
+            }
+        } while (cartasGeneradas < 5);
         hashPoker();
     }
     private String checkClase(){
@@ -164,7 +162,8 @@ public class Poker {
         }
     public static void main(String[] args) {
             Poker p = new Poker();
-            p.inputCartas();
-        System.out.println(p.checkClase());
+            p.getRandom();
+            System.out.println(Arrays.toString(p.cartas));
+            System.out.println(p.checkClase());
     }
 }
