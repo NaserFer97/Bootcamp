@@ -3,11 +3,13 @@ import java.util.*;
 
 public class Poker {
     private final HashMap<String, Integer> hashPoker = new HashMap<>();
-    private final String[] valoresNumericos = {"A","2","3","4","5","6","7","8","9","T","J","Q","K"};
+//    private final String[] valoresNumericos = {"A","2","3","4","5","6","7","8","9","T","J","Q","K"};
+    private final String valoresNumericos = "A23456789TJQK";
     private final String[] palos = {"S","C","H","D"};
     private final String[] cartas = {"", "", "", "", ""};
     private int mayorOcurrencia = 0;
     private String mayorValor = null;
+    private int[] indice = new int[5];
 
     private void getRandom() {
         //Generar un numero random con elementos de Numerico y Palos.
@@ -18,7 +20,7 @@ public class Poker {
             boolean flag = false;
             int indexNumerico = random.nextInt(13);
             int indexPalos = random.nextInt(4);
-            cartaGenerada = String.format("%s%s", valoresNumericos[indexNumerico], palos[indexPalos]);
+            cartaGenerada = String.format("%s%s", valoresNumericos.charAt(indexNumerico), palos[indexPalos]);
             for (int x = 0; x<5; x++) {
                 if (cartas[x].equals(cartaGenerada)) {
                     flag = true;
@@ -57,7 +59,32 @@ public class Poker {
         if (tercia()){
             return "TERCIA";
         }
-        else{return "CARTA ALTA";}
+        else{
+            return cartaAlta();
+        }
+    }
+
+
+    public String cartaAlta() {
+        if (as()) {
+            if (cartas[0].charAt(0) == 'A') {
+                mayorValor = cartas[0];
+                return "CARTA ALTA: "+mayorValor;
+            } else if (cartas[4].charAt(0) == 'A') {
+                mayorValor = cartas[4];
+                return "CARTA ALTA: "+mayorValor;
+            }
+        }
+        for (int x = 0; x < 5; x++) {
+            indice[x] = valoresNumericos.indexOf(cartas[x].charAt(0));
+        }
+        Arrays.sort(indice);
+        for (int x = 0; x < 5; x++) {
+            if (cartas[x].charAt(0) ==  valoresNumericos.charAt(indice[4])) {
+                return "CARTA ALTA: "+cartas[x];
+            }
+        }
+        return "";
     }
     private boolean color(){
         for (int x = 0; x < 4; x++) {
@@ -135,6 +162,9 @@ public class Poker {
         }
         return contador == 2;
     }
+    private boolean as(){
+        return cartas[0].charAt(0) == 'A' || cartas[4].charAt(0) == 'A';
+    }
     private boolean escalera() {
         int index1 = -1;
         int index2 = -1;
@@ -147,10 +177,10 @@ public class Poker {
             String carta = cartas[x];
             String cartaSiguiente = cartas[x + 1];
             for (int i = 0; i < 13; i++) {
-                if (String.valueOf(carta.charAt(0)).equals(valoresNumericos[i])){
+                if (carta.charAt(0) == valoresNumericos.charAt(i)){
                     index1 = i;
                 }
-                if (String.valueOf(cartaSiguiente.charAt(0)).equals(valoresNumericos[i])){
+                if (cartaSiguiente.charAt(0) == valoresNumericos.charAt(i)){
                     index2 = i;
                 }
             }
