@@ -130,12 +130,17 @@ public class Poker {
     private boolean escaleraColor() {
         int index1 = -1;
         int index2 = -1;
+        //check si los palos son iguales
         for (int x = 0; x < 4; x++) {
             String carta = cartas[x];
             String cartaSiguiente = cartas[x + 1];
             if (!String.valueOf(carta.charAt(1)).equals(String.valueOf(cartaSiguiente.charAt(1)))){
                 return false;
             }
+        }
+        //Verificar que A este en la posicion 0 o la ultima.
+        if (!String.valueOf(cartas[0].charAt(0)).equals("A") && !String.valueOf(cartas[4].charAt(0)).equals("A")) {
+            return false;
         }
         for (int x = 0; x < 4; x++){
             String carta = cartas[x];
