@@ -33,8 +33,14 @@ public class Poker {
         hashPoker();
     }
     private String checkClase(){
-        if (escaleraColor()){
+        if (escalera() && color()){
             return "ESCALERA COLOR";
+        }
+        if (escalera()){
+            return "ESCALERA";
+        }
+        if (color()){
+            return "COLOR";
         }
         if (poker()){
             return "POKER";
@@ -52,6 +58,16 @@ public class Poker {
             return "TERCIA";
         }
         else{return "CARTA ALTA";}
+    }
+    private boolean color(){
+        for (int x = 0; x < 4; x++) {
+            String carta = cartas[x];
+            String cartaSiguiente = cartas[x + 1];
+            if (!String.valueOf(carta.charAt(1)).equals(String.valueOf(cartaSiguiente.charAt(1)))){
+                return false;
+            }
+        }
+        return true;
     }
     private int checkMayorValor(){
         //Chequear cuantas veces se repite un numerico dentro de la baraja.
@@ -119,21 +135,14 @@ public class Poker {
         }
         return contador == 2;
     }
-    private boolean escaleraColor() {
+    private boolean escalera() {
         int index1 = -1;
         int index2 = -1;
-        //check si los palos son iguales. Si son iguales, retornar false.
-        for (int x = 0; x < 4; x++) {
-            String carta = cartas[x];
-            String cartaSiguiente = cartas[x + 1];
-            if (!String.valueOf(carta.charAt(1)).equals(String.valueOf(cartaSiguiente.charAt(1)))){
-                return false;
-            }
-        }
         //Verificar que A este en la posicion 0 o la ultima. Si no esta en esas posiciones, retornar false.
+        if (hashPoker.containsKey("A")){
         if (!String.valueOf(cartas[0].charAt(0)).equals("A") && !String.valueOf(cartas[4].charAt(0)).equals("A")) {
             return false;
-        }
+        }}
         for (int x = 0; x < 4; x++){
             String carta = cartas[x];
             String cartaSiguiente = cartas[x + 1];
