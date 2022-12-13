@@ -10,6 +10,7 @@ public class Poker {
     private String mayorValor = null;
 
     private void getRandom() {
+        //Generar un numero random con elementos de Numerico y Palos.
         Random random = new Random();
         String cartaGenerada;
         int cartasGeneradas =0;
@@ -53,43 +54,33 @@ public class Poker {
         else{return "CARTA ALTA";}
     }
     private int checkMayorValor(){
+        //Chequear cuantas veces se repite un numerico dentro de la baraja.
         for (int x =0; x<5; x++) {
             int contador =0;
+            String numericoActual = String.valueOf(cartas[x].charAt(0));
             for (int j = 0; j<5; j++){
-                if (Objects.equals(String.valueOf(cartas[x].charAt(0)), String.valueOf(cartas[j].charAt(0)))){
+                String numericoSiguiente = String.valueOf(cartas[j].charAt(0));
+                if (Objects.equals(numericoActual, numericoSiguiente)){
                     contador++;
                 }
             }
             if (contador>mayorOcurrencia){
                 mayorOcurrencia = contador;
-                mayorValor = String.valueOf(cartas[x].charAt(0));
+                mayorValor = numericoActual;
             }
         }
         return mayorOcurrencia;
     }
     private boolean poker(){
-        if(checkMayorValor()==4) {
-            String[] poker = new String[4];
-            for (int x = 0; x < 5; x++) {
-                if (Objects.equals(String.valueOf(cartas[x].charAt(0)), mayorValor)) {
-                    poker[x] = String.valueOf(cartas[x].charAt(1));
-                }
-            }
-            for (int x=0; x<4; x++) {
-                for (int j = x+1; j < 4; j++) {
-                    if (Objects.equals(poker[x], poker[j])) {
-                        return false;
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
+        //Verificar si hay una llave tiene 4 como valor.
+        return hashPoker.containsValue(4);
     }
     private boolean fullHouse() {
+        //Es Fullhouse si una llave tiene 3 como valor y otra llave tiene 2 como valor.
         return hashPoker.containsValue(3) && hashPoker.containsValue(2);
     }
     private boolean par(){
+        //Es par si dos llaves tienen 2 como valor.
         int contador = 0;
         for (int i : hashPoker.values()){
             if (i == 2){
@@ -99,15 +90,18 @@ public class Poker {
         return contador == 1;
     }
     private void hashPoker() {
+        //Pasar los valores numericos a un hashmap.
         for (int x = 0; x < 5; x++) {
-            if (hashPoker.containsKey(cartas[x])) {
-                hashPoker.put(cartas[x], hashPoker.get(cartas[x]) + Integer.parseInt("1"));
+            String numerico = String.valueOf(cartas[x].charAt(0));
+            if (hashPoker.containsKey(numerico)) {
+                hashPoker.put(numerico, hashPoker.get(numerico) + Integer.parseInt("1"));
             } else {
-                hashPoker.put(cartas[x], 1);
+                hashPoker.put(numerico, 1);
             }
         }
     }
     private boolean tercia(){
+        //Es tercia si hay una llave con 3 como valor.
         int contador = 0;
         for (int i : hashPoker.values()){
             if (i == 3){
@@ -128,7 +122,7 @@ public class Poker {
     private boolean escaleraColor() {
         int index1 = -1;
         int index2 = -1;
-        //check si los palos son iguales
+        //check si los palos son iguales. Si son iguales, retornar false.
         for (int x = 0; x < 4; x++) {
             String carta = cartas[x];
             String cartaSiguiente = cartas[x + 1];
@@ -136,7 +130,7 @@ public class Poker {
                 return false;
             }
         }
-        //Verificar que A este en la posicion 0 o la ultima.
+        //Verificar que A este en la posicion 0 o la ultima. Si no esta en esas posiciones, retornar false.
         if (!String.valueOf(cartas[0].charAt(0)).equals("A") && !String.valueOf(cartas[4].charAt(0)).equals("A")) {
             return false;
         }
