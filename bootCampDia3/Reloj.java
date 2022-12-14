@@ -104,7 +104,7 @@ public class Reloj {
         convertirAHora(segundosTotal);
     }
     //metodo toString, debe retornar un string representando el objeto reloj en el formato hh:mm:ss
-    //Hice que sea void para evitar tantos System.out.println en el codigo
+    //Hice que sea void para evitar tantos System...println en el codigo
     public void toStringg(){
         System.out.println("La hora es: [" +this.horas+":"+this.minutos+":"+this.segundos+"]");
     }
@@ -139,6 +139,7 @@ public class Reloj {
         Reloj reloj2 = new Reloj(segundos);
         reloj.restaReloj(reloj2);
         reloj.toStringg();
+        System.out.println("Prueba del Fork")
     }
 }
 
